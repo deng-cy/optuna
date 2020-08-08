@@ -325,7 +325,7 @@ class CmaEsSampler(BaseSampler):
                 and len(t.intermediate_values) > 0
                 and self._consider_pruned_trials
             ):
-                _, value = max(t.intermediate_values.items())
+                _, value = min(t.intermediate_values.items()) if study.direction == StudyDirection.MAXIMIZE else max(t.intermediate_values.items())
                 if value is None:
                     continue
                 # We rewrite the value of the trial `t` for sampling, so we need a deepcopy.
